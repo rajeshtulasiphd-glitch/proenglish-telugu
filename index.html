@@ -12,6 +12,7 @@
         /* Custom styles to apply the fonts */
         body {
             font-family: 'Inter', sans-serif;
+            color: #1f2937; /* Default text color set to gray-800 */
         }
         .telugu {
             font-family: 'Noto Sans Telugu', sans-serif;
@@ -20,489 +21,352 @@
         html {
             scroll-behavior: smooth;
         }
+        /* Custom card styling for a cleaner look */
+        .lesson-card {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+        }
+        .lesson-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.08);
+        }
         /* Custom focus ring for accessibility */
         .focusable:focus {
             outline: none;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.4);
         }
         /* Custom gradient for header */
         .header-gradient {
-            background: linear-gradient(to right, #4f46e5, #0ea5e9);
+            /* Deeper, more distinct gradient */
+            background: linear-gradient(to right, #4338ca, #1d4ed8); 
         }
-        /* Custom card styling for a cleaner look */
-        .lesson-card {
-            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-        }
-        .lesson-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
-        /* Styles for practice questions */
         .quiz-option {
             transition: background-color 0.2s;
+            border: 1px solid #e5e7eb;
         }
-        .quiz-option:hover {
-            background-color: #f0f9ff; /* light sky */
+        .quiz-option:hover:not(.checked) {
+            background-color: #eef2ff; /* indigo-50 */
         }
         .correct {
             color: #16a34a; /* green-600 */
+            font-weight: 600;
         }
         .incorrect {
             color: #dc2626; /* red-600 */
+            font-weight: 600;
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="bg-gray-50">
 
     <!-- Header Section -->
-    <header class="header-gradient text-white shadow-lg sticky top-0 z-50">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold">
+    <header class="header-gradient text-white shadow-xl sticky top-0 z-50">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold focusable rounded p-1">
                 ProEnglish <span class="telugu font-semibold">తెలుగు</span>
             </a>
             <div class="hidden md:flex space-x-6 text-lg">
-                <a href="#phrases" class="hover:text-sky-200 transition duration-300 focusable rounded px-2 py-1">Phrases</a>
-                <a href="#grammar" class="hover:text-sky-200 transition duration-300 focusable rounded px-2 py-1">Grammar</a>
-                <a href="#workplace" class="hover:text-sky-200 transition duration-300 focusable rounded px-2 py-1">Workplace English</a>
-                <a href="#ted" class="hover:text-sky-200 transition duration-300 focusable rounded px-2 py-1">TED Talks Book</a>
-                <a href="#speaking" class="hover:text-sky-200 transition duration-300 focusable rounded px-2 py-1">Public Speaking</a>
-                <a href="#practice" class="hover:text-sky-200 transition duration-300 focusable rounded px-2 py-1 font-semibold">Practice</a>
+                <a href="#phrases" class="hover:text-indigo-200 transition duration-300 focusable rounded px-3 py-1">Phrases</a>
+                <a href="#grammar" class="hover:text-indigo-200 transition duration-300 focusable rounded px-3 py-1">Grammar</a>
+                <a href="#workplace" class="hover:text-indigo-200 transition duration-300 focusable rounded px-3 py-1">Workplace</a>
+                <a href="#ted" class="hover:text-indigo-200 transition duration-300 focusable rounded px-3 py-1">TED Book</a>
+                <a href="#speaking" class="hover:text-indigo-200 transition duration-300 focusable rounded px-3 py-1">Speaking</a>
+                <a href="#practice" class="hover:text-indigo-200 transition duration-300 focusable rounded px-3 py-1 font-bold bg-indigo-700/50">Practice</a>
             </div>
-            <button id="mobile-menu-button" class="md:hidden focusable rounded p-2">
+            <button id="mobile-menu-button" class="md:hidden focusable rounded p-2 transition duration-300 hover:bg-white/10" aria-label="Toggle mobile menu">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
                 </svg>
             </button>
         </nav>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="md:hidden hidden px-6 pb-4">
-            <a href="#phrases" class="block py-2 text-lg hover:text-sky-200 transition duration-300 focusable rounded">Phrases</a>
-            <a href="#grammar" class="block py-2 text-lg hover:text-sky-200 transition duration-300 focusable rounded">Grammar</a>
-            <a href="#workplace" class="block py-2 text-lg hover:text-sky-200 transition duration-300 focusable rounded">Workplace English</a>
-            <a href="#ted" class="block py-2 text-lg hover:text-sky-200 transition duration-300 focusable rounded">TED Talks Book</a>
-            <a href="#speaking" class="block py-2 text-lg hover:text-sky-200 transition duration-300 focusable rounded">Public Speaking</a>
-            <a href="#practice" class="block py-2 text-lg hover:text-sky-200 transition duration-300 focusable rounded font-semibold">Practice</a>
+        <div id="mobile-menu" class="md:hidden hidden px-4 pb-4 bg-indigo-800">
+            <a href="#phrases" class="block py-2 text-lg hover:bg-indigo-700 rounded-lg px-3 transition duration-300 focusable">Phrases</a>
+            <a href="#grammar" class="block py-2 text-lg hover:bg-indigo-700 rounded-lg px-3 transition duration-300 focusable">Grammar</a>
+            <a href="#workplace" class="block py-2 text-lg hover:bg-indigo-700 rounded-lg px-3 transition duration-300 focusable">Workplace English</a>
+            <a href="#ted" class="block py-2 text-lg hover:bg-indigo-700 rounded-lg px-3 transition duration-300 focusable">TED Talks Book</a>
+            <a href="#speaking" class="block py-2 text-lg hover:bg-indigo-700 rounded-lg px-3 transition duration-300 focusable">Public Speaking</a>
+            <a href="#practice" class="block py-2 text-lg hover:bg-indigo-700 rounded-lg px-3 transition duration-300 focusable font-semibold bg-indigo-700">Practice</a>
         </div>
     </header>
 
     <!-- Main Content -->
-    <main class="container mx-auto px-6 py-12">
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
         <!-- Hero Section -->
         <section class="text-center mb-16">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">Master Professional English Communication</h1>
-            <p class="telugu text-xl md:text-2xl text-indigo-600 font-semibold">మీ వృత్తిపరమైన ఇంగ్లీష్ నైపుణ్యాలను మెరుగుపరుచుకోండి</p>
-            <p class="text-lg text-gray-600 mt-4 max-w-3xl mx-auto">A complete guide for Telugu speakers to learn English for the modern workplace, from daily conversations to professional emails and practice questions.</p>
+            <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 mb-4 tracking-tight">Master Professional English Communication</h1>
+            <p class="telugu text-xl md:text-3xl text-indigo-700 font-semibold italic">మీ వృత్తిపరమైన ఇంగ్లీష్ నైపుణ్యాలను మెరుగుపరుచుకోండి</p>
+            <p class="text-lg text-gray-600 mt-6 max-w-4xl mx-auto">A complete, targeted guide for Telugu speakers to excel in the modern workplace, focusing on practical phrases, clear grammar, and powerful public speaking skills.</p>
         </section>
 
-        <!-- Phrases Section -->
-        <section id="phrases" class="mb-16">
-            <h2 class="text-3xl font-bold text-gray-800 border-l-4 border-indigo-500 pl-4 mb-8">1. Common Professional Phrases <span class="telugu text-2xl">(సాధారణ వృత్తిపరమైన పదబంధాలు)</span></h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Greetings Card -->
-                <div class="bg-white rounded-xl shadow-md p-6 lesson-card">
-                    <h3 class="text-xl font-bold text-sky-700 mb-3">Greetings & Introductions</h3>
-                    <p class="telugu text-lg font-semibold text-sky-600 mb-4">శుభాకాంక్షలు & పరిచయాలు</p>
-                    <div class="space-y-4">
-                        <div>
-                            <p class="font-semibold text-gray-700">"Good morning. How are you doing today?"</p>
-                            <p class="telugu text-gray-600">"శుభోదయం. ఈ రోజు మీరు ఎలా ఉన్నారు?"</p>
-                        </div>
-                        <div>
-                            <p class="font-semibold text-gray-700">"It's a pleasure to meet you."</p>
-                            <p class="telugu text-gray-600">"మిమ్మల్ని కలవడం ఆనందంగా ఉంది."</p>
-                        </div>
-                        <div>
-                            <p class="font-semibold text-gray-700">"My name is Anand, I'm the new Project Manager."</p>
-                            <p class="telugu text-gray-600">"నా పేరు ఆనంద్, నేను కొత్త ప్రాజెక్ట్ మేనేజర్‌ను."</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Small Talk Card -->
-                <div class="bg-white rounded-xl shadow-md p-6 lesson-card">
-                    <h3 class="text-xl font-bold text-sky-700 mb-3">Small Talk</h3>
-                    <p class="telugu text-lg font-semibold text-sky-600 mb-4">చిన్న సంభాషణ</p>
-                    <div class="space-y-4">
-                        <div>
-                            <p class="font-semibold text-gray-700">"How was your weekend?"</p>
-                            <p class="telugu text-gray-600">"మీ వారాంతం ఎలా గడిచింది?"</p>
-                        </div>
-                        <div>
-                            <p class="font-semibold text-gray-700">"Are you working on anything exciting recently?"</p>
-                            <p class="telugu text-gray-600">"మీరు ఇటీవల ఏదైనా ఆసక్తికరమైన దానిపై పని చేస్తున్నారా?"</p>
-                        </div>
-                        <div>
-                            <p class="font-semibold text-gray-700">"I'm looking forward to the long weekend."</p>
-                            <p class="telugu text-gray-600">"నేను సుదీర్ఘ వారాంతం కోసం ఎదురు చూస్తున్నాను."</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Asking for Help Card -->
-                <div class="bg-white rounded-xl shadow-md p-6 lesson-card">
-                    <h3 class="text-xl font-bold text-sky-700 mb-3">Asking for Help</h3>
-                    <p class="telugu text-lg font-semibold text-sky-600 mb-4">సహాయం అడగడం</p>
-                     <div class="space-y-4">
-                        <div>
-                            <p class="font-semibold text-gray-700">"Could you please help me with this?"</p>
-                            <p class="telugu text-gray-600">"దయచేసి దీనితో నాకు సహాయం చేయగలరా?"</p>
-                        </div>
-                        <div>
-                            <p class="font-semibold text-gray-700">"Do you have a moment to review this document?"</p>
-                            <p class="telugu text-gray-600">"ఈ పత్రాన్ని సమీక్షించడానికి మీకు కొంచెం సమయం ఉందా?"</p>
-                        </div>
-                        <div>
-                            <p class="font-semibold text-gray-700">"I'm not sure how to proceed. Can you advise?"</p>
-                            <p class="telugu text-gray-600">"ఎలా ముందుకు వెళ్లాలో నాకు ఖచ్చితంగా తెలియదు. మీరు సలహా ఇవ్వగలరా?"</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Giving Opinions Card -->
-                <div class="bg-white rounded-xl shadow-md p-6 lesson-card">
-                    <h3 class="text-xl font-bold text-sky-700 mb-3">Giving Opinions</h3>
-                    <p class="telugu text-lg font-semibold text-sky-600 mb-4">అభిప్రాయాలు చెప్పడం</p>
-                     <div class="space-y-4">
-                        <div>
-                            <p class="font-semibold text-gray-700">"In my opinion, we should focus on quality."</p>
-                            <p class="telugu text-gray-600">"నా అభిప్రాయం ప్రకారం, మనం నాణ్యతపై దృష్టి పెట్టాలి."</p>
-                        </div>
-                        <div>
-                            <p class="font-semibold text-gray-700">"I believe this is the best approach."</p>
-                            <p class="telugu text-gray-600">"ఇది ఉత్తమమైన విధానం అని నేను నమ్ముతున్నాను."</p>
-                        </div>
-                        <div>
-                            <p class="font-semibold text-gray-700">"From my perspective, the deadline is too tight."</p>
-                            <p class="telugu text-gray-600">"నా దృష్టికోణంలో, గడువు చాలా తక్కువగా ఉంది."</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Agreeing Card -->
-                <div class="bg-white rounded-xl shadow-md p-6 lesson-card">
-                    <h3 class="text-xl font-bold text-sky-700 mb-3">Agreeing</h3>
-                    <p class="telugu text-lg font-semibold text-sky-600 mb-4">అంగీకరించడం</p>
-                     <div class="space-y-4">
-                        <div>
-                            <p class="font-semibold text-gray-700">"I completely agree with you."</p>
-                            <p class="telugu text-gray-600">"నేను మీతో పూర్తిగా ఏకీభవిస్తున్నాను."</p>
-                        </div>
-                        <div>
-                            <p class="font-semibold text-gray-700">"That's a great point."</p>
-                            <p class="telugu text-gray-600">"అది చాలా మంచి విషయం."</p>
-                        </div>
-                        <div>
-                            <p class="font-semibold text-gray-700">"Exactly! I was thinking the same thing."</p>
-                            <p class="telugu text-gray-600">"ఖచ్చితంగా! నేను కూడా అదే ఆలోచిస్తున్నాను."</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Disagreeing Politely Card -->
-                <div class="bg-white rounded-xl shadow-md p-6 lesson-card">
-                    <h3 class="text-xl font-bold text-sky-700 mb-3">Disagreeing Politely</h3>
-                    <p class="telugu text-lg font-semibold text-sky-600 mb-4">మర్యాదగా విభేదించడం</p>
-                     <div class="space-y-4">
-                        <div>
-                            <p class="font-semibold text-gray-700">"I see your point, but I have a different view."</p>
-                            <p class="telugu text-gray-600">"మీ ఉద్దేశం నాకు అర్థమైంది, కానీ నాకు వేరే అభిప్రాయం ఉంది."</p>
-                        </div>
-                        <div>
-                            <p class="font-semibold text-gray-700">"I'm not sure I agree with that."</p>
-                            <p class="telugu text-gray-600">"నేను దానితో ఏకీభవిస్తానో లేదో నాకు ఖచ్చితంగా తెలియదు."</p>
-                        </div>
-                        <div>
-                            <p class="font-semibold text-gray-700">"Perhaps we could consider another option?"</p>
-                            <p class="telugu text-gray-600">"బహుశా మనం మరో ఎంపికను పరిగణించవచ్చా?"</p>
-                        </div>
-                    </div>
-                </div>
+        <!-- 1. Phrases Section (Dynamically Generated) -->
+        <section id="phrases" class="mb-20">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-gray-800 border-l-4 border-indigo-600 pl-4 mb-10">1. Common Professional Phrases <span class="telugu text-2xl font-normal text-gray-500">(సాధారణ వృత్తిపరమైన పదబంధాలు)</span></h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="phrases-container">
+                <!-- Cards will be injected here by JavaScript -->
             </div>
         </section>
 
-        <!-- Grammar Section ... -->
-        <section id="grammar" class="mb-16">
-            <!-- ... existing grammar content ... -->
-        </section>
-
-        <!-- Workplace Communication Section ... -->
-        <section id="workplace" class="mb-16">
-            <!-- ... existing workplace content ... -->
-        </section>
-
-        <!-- TED Talks Book Summary Section -->
-        <section id="ted" class="mb-16">
-            <h2 class="text-3xl font-bold text-gray-800 border-l-4 border-red-500 pl-4 mb-8">4. Learn from the 'TED Talks' Book <span class="telugu text-2xl">(TED టాక్స్ పుస్తకం నుండి నేర్చుకోండి)</span></h2>
-            <div class="bg-white rounded-xl shadow-md p-8 lesson-card">
-                <p class="text-gray-600 mb-6">Here is a summary of the key principles from "TED Talks: The Official TED Guide to Public Speaking" by Chris Anderson. Use these tips to make your presentations more powerful and engaging.</p>
-                
-                <h3 class="text-2xl font-bold text-gray-800 mb-4">Core Principles for a Great Talk</h3>
-                <p class="telugu text-xl font-semibold text-red-600 mb-6">గొప్ప ప్రసంగానికి కీలక సూత్రాలు</p>
+        <!-- 2. Grammar Section -->
+        <section id="grammar" class="mb-20">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-gray-800 border-l-4 border-yellow-600 pl-4 mb-10">2. Essential Grammar Focus <span class="telugu text-2xl font-normal text-gray-500">(ముఖ్యమైన వ్యాకరణం)</span></h2>
+            <div class="bg-white rounded-xl shadow-lg p-6 sm:p-8 lesson-card">
+                <h3 class="text-2xl font-bold text-yellow-700 mb-4">Mastering Tenses for Professional Use</h3>
+                <p class="telugu text-lg text-gray-600 mb-6">వృత్తిపరమైన ఉపయోగం కోసం కాలాలను (Tenses) నేర్చుకోవడం.</p>
                 
                 <div class="space-y-6">
-                    <!-- Principle 1: Throughline -->
-                    <div>
-                        <h4 class="font-bold text-lg text-red-700">1. Have One Core Idea (a "Throughline")</h4>
-                        <p class="text-gray-700 mt-1">Don't try to cover too much. Focus on a single, powerful idea and build your entire talk around it. This is the main takeaway you want to leave with your audience.</p>
-                        <p class="telugu text-gray-600 font-medium"><strong>తెలుగులో:</strong> ఒకే ఒక ప్రధాన ఆలోచనపై దృష్టి పెట్టండి. మీ ప్రసంగం మొత్తం దాని చుట్టూ నిర్మించండి.</p>
+                    <div class="border-b pb-4">
+                        <h4 class="font-bold text-xl text-gray-800 mb-2">Simple Past Tense (గత కాలం)</h4>
+                        <p class="text-gray-700">Used for actions completed at a definite time in the past (e.g., yesterday, last week, 2023).</p>
+                        <ul class="list-disc list-inside mt-2 ml-4 text-gray-600 space-y-1">
+                            <li>**English:** "I **sent** the email yesterday."</li>
+                            <li class="telugu">**Telugu:** "నేను నిన్న ఈమెయిల్ **పంపించాను**."</li>
+                        </ul>
                     </div>
-                    <!-- Principle 2: Connection -->
-                    <div>
-                        <h4 class="font-bold text-lg text-red-700">2. Connect with Your Audience's Humanity</h4>
-                        <p class="text-gray-700 mt-1">Make eye contact, show vulnerability, and use humor. A talk is a human-to-human experience. Before an audience will listen to your idea, they need to trust you.</p>
-                        <p class="telugu text-gray-600 font-medium"><strong>తెలుగులో:</strong> కళ్లతో మాట్లాడండి, మీ బలహీనతను చూపించండి, మరియు నమ్మకాన్ని పెంచుకోండి. మానవ సంబంధం ముఖ్యం.</p>
+                    <div class="border-b pb-4">
+                        <h4 class="font-bold text-xl text-gray-800 mb-2">Present Continuous Tense (వర్తమానంలో కొనసాగుతున్నది)</h4>
+                        <p class="text-gray-700">Used for actions happening right now or temporary actions around now.</p>
+                        <ul class="list-disc list-inside mt-2 ml-4 text-gray-600 space-y-1">
+                            <li>**English:** "We **are discussing** the budget right now."</li>
+                            <li class="telugu">**Telugu:** "మేము ఇప్పుడు బడ్జెట్‌ను **చర్చిస్తున్నాము**."</li>
+                        </ul>
                     </div>
-                    <!-- Principle 3: Narration -->
                     <div>
-                        <h4 class="font-bold text-lg text-red-700">3. Tell a Story</h4>
-                        <p class="text-gray-700 mt-1">Our brains are wired for stories. Use personal anecdotes or compelling narratives to make your points relatable, emotional, and memorable.</p>
-                        <p class="telugu text-gray-600 font-medium"><strong>తెలుగులో:</strong> మీ పాయింట్లను గుర్తుండిపోయేలా చేయడానికి కథలను చెప్పండి. ఇది భావోద్వేగాలను రేకెత్తిస్తుంది.</p>
-                    </div>
-                    <!-- Principle 4: Explanation -->
-                    <div>
-                        <h4 class="font-bold text-lg text-red-700">4. Explain, Don't Just State</h4>
-                        <p class="text-gray-700 mt-1">Don't assume your audience knows what you're talking about. Use simple language, metaphors, and clear examples to explain complex topics step-by-step.</p>
-                        <p class="telugu text-gray-600 font-medium"><strong>తెలుగులో:</strong> కఠినమైన విషయాలను సులభమైన భాషలో, ఉదాహరణలతో వివరించండి.</p>
-                    </div>
-                     <!-- Principle 5: Rehearsal -->
-                    <div>
-                        <h4 class="font-bold text-lg text-red-700">5. Rehearse for Success</h4>
-                        <p class="text-gray-700 mt-1">The best talks are the result of rigorous practice. Rehearse until your talk feels natural, not memorized. This builds confidence and ensures a smooth delivery.</p>
-                        <p class="telugu text-gray-600 font-medium"><strong>తెలుగులో:</strong> మీ ప్రసంగం సహజంగా వచ్చే వరకు ప్రాక్టీస్ చేయండి. ఇది ఆత్మవిశ్వాసాన్ని పెంచుతుంది.</p>
+                        <h4 class="font-bold text-xl text-gray-800 mb-2">Future Simple Tense (భవిష్యత్ కాలం)</h4>
+                        <p class="text-gray-700">Used for planned actions or quick decisions about the future.</p>
+                        <ul class="list-disc list-inside mt-2 ml-4 text-gray-600 space-y-1">
+                            <li>**English:** "I **will call** you back in five minutes."</li>
+                            <li class="telugu">**Telugu:** "నేను మీకు ఐదు నిమిషాలలో **తిరిగి కాల్ చేస్తాను**."</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Public Speaking Masterclass Section -->
-        <section id="speaking" class="mb-16">
-            <h2 class="text-3xl font-bold text-gray-800 border-l-4 border-green-500 pl-4 mb-8">5. Public Speaking Masterclass <span class="telugu text-2xl">(పబ్లిక్ స్పీకింగ్ మాస్టర్‌క్లాస్)</span></h2>
-            <p class="text-lg text-gray-600 mb-8 max-w-3xl">Based on the principles from the "TED Talks" book, this section will teach you how to apply these ideas to give a powerful and memorable presentation.</p>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Find Your Throughline -->
-                <div class="bg-white rounded-xl shadow-md p-6 lesson-card">
-                    <h3 class="text-xl font-bold text-green-700 mb-3">Find Your Core Idea (Throughline)</h3>
-                    <p class="telugu text-lg font-semibold text-green-600 mb-4">మీ ప్రధాన ఆలోచనను కనుగొనండి</p>
-                    <p class="text-gray-700 mb-4">Every great talk has one central idea that connects everything. Your goal is to build this one idea in the minds of your audience.</p>
-                    <div class="space-y-3">
-                        <p class="font-semibold text-gray-700">Ask yourself: "What is the single most important thing I want my audience to remember?"</p>
-                        <p class="telugu text-gray-600">"నా ప్రేక్షకులు గుర్తుంచుకోవలసిన ముఖ్యమైన విషయం ఏమిటి?" అని మిమ్మల్ని మీరు ప్రశ్నించుకోండి.</p>
+        <!-- 3. Workplace Communication Section -->
+        <section id="workplace" class="mb-20">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-gray-800 border-l-4 border-sky-600 pl-4 mb-10">3. Writing Professional Emails <span class="telugu text-2xl font-normal text-gray-500">(వృత్తిపరమైన ఈమెయిల్‌లు రాయడం)</span></h2>
+            <div class="bg-white rounded-xl shadow-lg p-6 sm:p-8 lesson-card">
+                <h3 class="text-2xl font-bold text-sky-700 mb-4">Key Elements of a Formal Email</h3>
+                <div class="space-y-6">
+                    <div class="p-4 bg-sky-50 rounded-lg">
+                        <h4 class="font-bold text-xl text-sky-800">1. Subject Line (విషయం)</h4>
+                        <p class="text-gray-700">Must be clear, concise, and convey the main purpose. <span class="telugu text-sm">(ప్రధాన ఉద్దేశాన్ని స్పష్టంగా చెప్పాలి.)</span></p>
+                        <p class="mt-2 text-sm font-mono text-gray-900">Example: `Action Required: Q3 Budget Review`</p>
+                    </div>
+                    <div class="p-4 bg-sky-50 rounded-lg">
+                        <h4 class="font-bold text-xl text-sky-800">2. Opening (ప్రారంభం)</h4>
+                        <p class="text-gray-700">Use formal greetings. Avoid overly casual language.</p>
+                        <p class="mt-2 text-sm font-mono text-gray-900">Example: `Dear Mr. Sharma,` or `Hello Team,`</p>
+                    </div>
+                    <div class="p-4 bg-sky-50 rounded-lg">
+                        <h4 class="font-bold text-xl text-sky-800">3. Closing & Call to Action (ముగింపు & చర్యకు పిలుపు)</h4>
+                        <p class="text-gray-700">Clearly state what you need and end respectfully.</p>
+                        <p class="mt-2 text-sm font-mono text-gray-900">Example: `Please confirm receipt by end of day.` <br>Closing: `Best regards,` or `Sincerely,`</p>
                     </div>
                 </div>
-                <!-- Connect with the Audience -->
+            </div>
+        </section>
+
+        <!-- 4 & 5. TED Talks and Public Speaking Masterclass -->
+        <section id="speaking" class="mb-20">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-gray-800 border-l-4 border-red-600 pl-4 mb-10">4. Public Speaking Masterclass <span class="telugu text-2xl font-normal text-gray-500">(పబ్లిక్ స్పీకింగ్ మాస్టర్‌క్లాస్)</span></h2>
+            <p class="text-lg text-gray-600 mb-8 max-w-5xl">Learn to deliver powerful presentations using the core principles of great speakers, focusing on connection, clarity, and confidence.</p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Connect with Audience -->
                 <div class="bg-white rounded-xl shadow-md p-6 lesson-card">
-                    <h3 class="text-xl font-bold text-green-700 mb-3">Connect with Your Audience</h3>
-                    <p class="telugu text-lg font-semibold text-green-600 mb-4">ప్రేక్షకులతో కనెక్ట్ అవ్వండి</p>
-                    <p class="text-gray-700 mb-4">Before you can share an idea, you need to build trust. Make a human connection from the very beginning.</p>
-                    <div class="space-y-3">
-                        <div>
-                            <p class="font-semibold text-gray-700">Make eye contact and smile. <span class="telugu">(కంటితో పరిచయం చేసి నవ్వండి.)</span></p>
-                        </div>
-                        <div>
-                            <p class="font-semibold text-gray-700">Show vulnerability; it's okay to be nervous. <span class="telugu">(మీ బలహీనతను చూపించండి; నర్వస్‌గా ఉండటం తప్పు కాదు.)</span></p>
-                        </div>
-                         <div>
-                            <p class="font-semibold text-gray-700">Use a short, personal story. <span class="telugu">(ఒక చిన్న, వ్యక్తిగత కథను ఉపయోగించండి.)</span></p>
-                        </div>
-                    </div>
+                    <h3 class="text-xl font-bold text-red-700 mb-3">Connect: Building Trust</h3>
+                    <p class="telugu text-lg font-semibold text-red-600 mb-4">నమ్మకాన్ని పెంచడం</p>
+                    <p class="text-gray-700 mb-4">Start by making a human connection. Share a personal anecdote or show genuine vulnerability to build rapport instantly.</p>
+                    <ul class="list-disc list-inside text-gray-600 ml-4 space-y-1">
+                        <li>**Tip:** Smile and make eye contact with different people.</li>
+                        <li class="telugu">**తెలుగు:** "కంటితో పరిచయం చేసి, నవ్వండి."</li>
+                    </ul>
                 </div>
                 <!-- Structure Your Talk -->
                 <div class="bg-white rounded-xl shadow-md p-6 lesson-card">
-                    <h3 class="text-xl font-bold text-green-700 mb-3">Structure Your Talk</h3>
-                    <p class="telugu text-lg font-semibold text-green-600 mb-4">మీ ప్రసంగాన్ని నిర్మించుకోండి</p>
-                    <p class="text-gray-700 mb-4">Take your audience on a journey. A clear structure helps them follow along without getting lost.</p>
-                    <div class="space-y-3">
-                        <div>
-                            <p class="font-semibold text-gray-700"><strong>Introduction:</strong> Start with a strong hook—a surprising question or a dramatic story.</p>
-                            <p class="telugu text-gray-600"><strong>పరిచయం:</strong> ఒక బలమైన హుక్‌తో ప్రారంభించండి.</p>
-                        </div>
-                        <div>
-                            <p class="font-semibold text-gray-700"><strong>Body:</strong> Explain your points one by one with examples and stories.</p>
-                            <p class="telugu text-gray-600"><strong>శరీరం:</strong> ఉదాహరణలతో మీ పాయింట్లను వివరించండి.</p>
-                        </div>
-                         <div>
-                            <p class="font-semibold text-gray-700"><strong>Conclusion:</strong> End with a memorable, powerful summary or a call to action.</p>
-                            <p class="telugu text-gray-600"><strong>ముగింపు:</strong> గుర్తుండిపోయే ముగింపు ఇవ్వండి.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Explain Tough Concepts -->
-                <div class="bg-white rounded-xl shadow-md p-6 lesson-card">
-                    <h3 class="text-xl font-bold text-green-700 mb-3">Explain Complex Ideas Simply</h3>
-                    <p class="telugu text-lg font-semibold text-green-600 mb-4">క్లిష్టమైన ఆలోచనలను సులభంగా వివరించండి</p>
-                     <p class="text-gray-700 mb-4">Avoid jargon. Use metaphors and examples that your audience can relate to.</p>
-                    <div class="space-y-3">
-                        <div>
-                             <p class="font-semibold text-gray-700"><strong>Metaphor:</strong> "A computer's RAM is like a short-term memory."</p>
-                             <p class="telugu text-gray-600"><strong>రూపకం:</strong> "కంప్యూటర్ RAM ఒక స్వల్పకాలిక జ్ఞాపకశక్తి లాంటిది."</p>
-                        </div>
-                         <div>
-                             <p class="font-semibold text-gray-700"><strong>Example:</strong> "Instead of just saying our profits grew, say: 'We sold enough to give every person in this city a free coffee.'"</p>
-                             <p class="telugu text-gray-600">"'మా లాభాలు పెరిగాయి' అని చెప్పే బదులు, 'ఈ నగరంలోని ప్రతి వ్యక్తికి ఉచిత కాఫీ ఇచ్చేంతగా అమ్మాము' అని చెప్పండి."</p>
-                        </div>
-                    </div>
+                    <h3 class="text-xl font-bold text-red-700 mb-3">Clarity: The Core Idea</h3>
+                    <p class="telugu text-lg font-semibold text-red-600 mb-4">స్పష్టత: ప్రధాన ఆలోచన</p>
+                    <p class="text-gray-700 mb-4">Define a single, memorable "Throughline" (central idea). Everything else in your talk must support this one idea.</p>
+                    <ul class="list-disc list-inside text-gray-600 ml-4 space-y-1">
+                        <li>**Tip:** Summarize your entire talk in a single sentence.</li>
+                        <li class="telugu">**తెలుగు:** "మీ ప్రసారాన్ని ఒక్క వాక్యంలో చెప్పగలగాలి."</li>
+                    </ul>
                 </div>
                 <!-- Rehearse Effectively -->
                 <div class="bg-white rounded-xl shadow-md p-6 lesson-card">
-                    <h3 class="text-xl font-bold text-green-700 mb-3">Rehearse, Rehearse, Rehearse!</h3>
-                    <p class="telugu text-lg font-semibold text-green-600 mb-4">ప్రాక్టీస్, ప్రాక్టీస్, ప్రాక్టీస్!</p>
-                    <p class="text-gray-700 mb-4">The best speakers are not just talented; they are well-prepared. Rehearsal builds confidence and makes your talk flow naturally.</p>
-                    <div class="space-y-3">
-                         <div>
-                            <p class="font-semibold text-gray-700">Practice in front of a friend for honest feedback.</p>
-                            <p class="telugu text-gray-600">నిజాయితీ అభిప్రాయం కోసం స్నేహితుడి ముందు ప్రాక్టీస్ చేయండి.</p>
-                        </div>
-                         <div>
-                            <p class="font-semibold text-gray-700">Time yourself to ensure you don't go over the limit.</p>
-                            <p class="telugu text-gray-600">సమయం మించకుండా చూసుకోవడానికి మిమ్మల్ని మీరు టైమ్ చేసుకోండి.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Control Your Nerves -->
-                <div class="bg-white rounded-xl shadow-md p-6 lesson-card">
-                    <h3 class="text-xl font-bold text-green-700 mb-3">Control Your Nerves</h3>
-                    <p class="telugu text-lg font-semibold text-green-600 mb-4">మీ నరాలను నియంత్రించుకోండి</p>
-                    <p class="text-gray-700 mb-4">Fear is energy. Turn it into excitement. Use these techniques to stay calm.</p>
-                    <div class="space-y-3">
-                         <div>
-                            <p class="font-semibold text-gray-700"><strong>Breathe Deeply:</strong> Take a few slow, deep breaths before you go on stage.</p>
-                            <p class="telugu text-gray-600"><strong>లోతైన శ్వాస:</strong> వేదికపైకి వెళ్లే ముందు కొన్ని నెమ్మదిగా, లోతైన శ్వాసలు తీసుకోండి.</p>
-                        </div>
-                         <div>
-                            <p class="font-semibold text-gray-700"><strong>Drink Water:</strong> Keep a bottle of water nearby.</p>
-                            <p class="telugu text-gray-600"><strong>నీరు త్రాగండి:</strong> దగ్గరలో ఒక నీటి సీసా ఉంచుకోండి.</p>
-                        </div>
-                         <div>
-                            <p class="font-semibold text-gray-700"><strong>Find Friendly Faces:</strong> Look for supportive people in the audience.</p>
-                            <p class="telugu text-gray-600"><strong>స్నేహపూర్వక ముఖాలు:</strong> ప్రేక్షకులలో మద్దతు ఇచ్చే వ్యక్తులను చూడండి.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- New Card: Opening Phrases -->
-                <div class="bg-white rounded-xl shadow-md p-6 lesson-card">
-                    <h3 class="text-xl font-bold text-green-700 mb-3">Key Phrases: Opening Your Talk</h3>
-                    <p class="telugu text-lg font-semibold text-green-600 mb-4">ప్రసంగాన్ని ప్రారంభించడం</p>
-                    <p class="text-gray-700 mb-4">Start your presentation confidently with these phrases.</p>
-                    <div class="space-y-4">
-                        <div>
-                            <p class="font-semibold text-gray-700">"Good morning/afternoon, everyone. Thank you for being here."</p>
-                            <p class="telugu text-gray-600">"అందరికీ శుభోదయం/శుభ మధ్యాహ్నం. ఇక్కడకు వచ్చినందుకు ధన్యవాదాలు."</p>
-                        </div>
-                        <div>
-                            <p class="font-semibold text-gray-700">"Today, I'd like to talk to you about..."</p>
-                            <p class="telugu text-gray-600">"ఈ రోజు, నేను మీతో ... గురించి మాట్లాడాలనుకుంటున్నాను."</p>
-                        </div>
-                        <div>
-                            <p class="font-semibold text-gray-700">"Let's begin, shall we?"</p>
-                            <p class="telugu text-gray-600">"మనం ప్రారంభిద్దామా?"</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- New Card: Transitioning Phrases -->
-                <div class="bg-white rounded-xl shadow-md p-6 lesson-card">
-                    <h3 class="text-xl font-bold text-green-700 mb-3">Key Phrases: Transitioning</h3>
-                    <p class="telugu text-lg font-semibold text-green-600 mb-4">విషయాల మధ్య మారడం</p>
-                    <p class="text-gray-700 mb-4">Use these phrases to move smoothly from one point to the next.</p>
-                    <div class="space-y-4">
-                        <div>
-                            <p class="font-semibold text-gray-700">"Now, let's move on to the next point."</p>
-                            <p class="telugu text-gray-600">"ఇప్పుడు, తదుపరి పాయింట్‌కి వెళ్దాం."</p>
-                        </div>
-                        <div>
-                            <p class="font-semibold text-gray-700">"This brings me to my next topic..."</p>
-                            <p class="telugu text-gray-600">"ఇది నన్ను నా తదుపరి అంశానికి తీసుకువస్తుంది..."</p>
-                        </div>
-                        <div>
-                            <p class="font-semibold text-gray-700">"Another important aspect to consider is..."</p>
-                            <p class="telugu text-gray-600">"పరిగణించవలసిన మరో ముఖ్యమైన అంశం..."</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- New Card: Concluding Phrases -->
-                <div class="bg-white rounded-xl shadow-md p-6 lesson-card">
-                    <h3 class="text-xl font-bold text-green-700 mb-3">Key Phrases: Concluding</h3>
-                    <p class="telugu text-lg font-semibold text-green-600 mb-4">ప్రసంగాన్ని ముగించడం</p>
-                    <p class="text-gray-700 mb-4">End your talk with a strong and clear conclusion.</p>
-                    <div class="space-y-4">
-                        <div>
-                            <p class="font-semibold text-gray-700">"To sum up, the main points are..."</p>
-                            <p class="telugu text-gray-600">"సారాంశంలో, ప్రధాన పాయింట్లు..."</p>
-                        </div>
-                        <div>
-                            <p class="font-semibold text-gray-700">"In conclusion, I'd like to say..."</p>
-                            <p class="telugu text-gray-600">"ముగింపులో, నేను చెప్పాలనుకుంటున్నాను..."</p>
-                        </div>
-                        <div>
-                            <p class="font-semibold text-gray-700">"Thank you for your attention. I'm now happy to answer any questions."</p>
-                            <p class="telugu text-gray-600">"మీ శ్రద్ధకు ధన్యవాదాలు. ఇప్పుడు ఏవైనా ప్రశ్నలకు సమాధానం ఇవ్వడానికి నేను సంతోషిస్తాను."</p>
-                        </div>
-                    </div>
+                    <h3 class="text-xl font-bold text-red-700 mb-3">Confidence: Rehearse Naturally</h3>
+                    <p class="telugu text-lg font-semibold text-red-600 mb-4">ఆత్మవిశ్వాసం: సహజంగా ప్రాక్టీస్ చేయండి</p>
+                    <p class="text-gray-700 mb-4">Practice until the talk flows naturally, not until it's memorized word-for-word. This reduces anxiety and helps you adapt.</p>
+                    <ul class="list-disc list-inside text-gray-600 ml-4 space-y-1">
+                        <li>**Tip:** Practice out loud, standing up, and time yourself.</li>
+                        <li class="telugu">**తెలుగు:** "నిలబడి, బిగ్గరగా ప్రాక్టీస్ చేయండి."</li>
+                    </ul>
                 </div>
             </div>
         </section>
 
 
-        <!-- Practice Section -->
-        <section id="practice" class="mb-16">
-            <h2 class="text-3xl font-bold text-gray-800 border-l-4 border-indigo-500 pl-4 mb-8">6. Practice Questions <span class="telugu text-2xl">(అభ్యాస ప్రశ్నలు)</span></h2>
-            <div class="bg-white rounded-xl shadow-md p-8 lesson-card">
-                <h3 class="text-2xl font-bold text-amber-700 mb-6">Test Your Knowledge</h3>
+        <!-- 6. Practice Section -->
+        <section id="practice" class="mb-20">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-gray-800 border-l-4 border-indigo-600 pl-4 mb-10">5. Practice Questions <span class="telugu text-2xl font-normal text-gray-500">(అభ్యాస ప్రశ్నలు)</span></h2>
+            <div class="bg-white rounded-xl shadow-lg p-6 sm:p-8 lesson-card">
+                <h3 class="text-2xl font-bold text-indigo-700 mb-6">Test Your Knowledge</h3>
                 
-                <!-- Quiz 1: Grammar -->
-                <div class="mb-8">
-                    <h4 class="text-xl font-semibold mb-4">Grammar Practice</h4>
-                    <div class="space-y-4" id="quiz1">
-                        <!-- Question 1 -->
-                        <div class="quiz-question" data-correct="b">
-                            <p class="font-semibold mb-2">1. I ______ the report yesterday.</p>
-                            <div class="space-y-1">
-                                <label class="flex items-center p-2 rounded-lg cursor-pointer quiz-option"><input type="radio" name="q1" value="a" class="mr-3"> complete</label>
-                                <label class="flex items-center p-2 rounded-lg cursor-pointer quiz-option"><input type="radio" name="q1" value="b" class="mr-3"> completed</label>
-                                <label class="flex items-center p-2 rounded-lg cursor-pointer quiz-option"><input type="radio" name="q1" value="c" class="mr-3"> will complete</label>
+                <!-- Quiz Container -->
+                <div class="space-y-8">
+                    <!-- Quiz 1: Grammar -->
+                    <div class="mb-4">
+                        <h4 class="text-xl font-semibold mb-4">Grammar Practice</h4>
+                        <div class="space-y-4" id="quiz1">
+                            <!-- Question 1 -->
+                            <div class="quiz-question" data-correct="b">
+                                <p class="font-semibold mb-2">1. I ______ the report yesterday.</p>
+                                <div class="space-y-1">
+                                    <label class="flex items-center p-3 rounded-lg cursor-pointer quiz-option"><input type="radio" name="q1" value="a" class="mr-3"> complete</label>
+                                    <label class="flex items-center p-3 rounded-lg cursor-pointer quiz-option"><input type="radio" name="q1" value="b" class="mr-3"> completed</label>
+                                    <label class="flex items-center p-3 rounded-lg cursor-pointer quiz-option"><input type="radio" name="q1" value="c" class="mr-3"> will complete</label>
+                                </div>
+                                <p class="text-sm mt-1 ml-8" id="result-q1"></p>
                             </div>
-                            <p class="text-sm mt-1 ml-8" id="result-q1"></p>
-                        </div>
-                        <!-- Question 2 -->
-                        <div class="quiz-question" data-correct="a">
-                            <p class="font-semibold mb-2">2. We should meet ______ 10 AM tomorrow.</p>
-                            <div class="space-y-1">
-                                <label class="flex items-center p-2 rounded-lg cursor-pointer quiz-option"><input type="radio" name="q2" value="a" class="mr-3"> at</label>
-                                <label class="flex items-center p-2 rounded-lg cursor-pointer quiz-option"><input type="radio" name="q2" value="b" class="mr-3"> on</label>
-                                <label class="flex items-center p-2 rounded-lg cursor-pointer quiz-option"><input type="radio" name="q2" value="c" class="mr-3"> in</label>
+                            <!-- Question 2 -->
+                            <div class="quiz-question" data-correct="a">
+                                <p class="font-semibold mb-2">2. We should meet ______ 10 AM tomorrow.</p>
+                                <div class="space-y-1">
+                                    <label class="flex items-center p-3 rounded-lg cursor-pointer quiz-option"><input type="radio" name="q2" value="a" class="mr-3"> at</label>
+                                    <label class="flex items-center p-3 rounded-lg cursor-pointer quiz-option"><input type="radio" name="q2" value="b" class="mr-3"> on</label>
+                                    <label class="flex items-center p-3 rounded-lg cursor-pointer quiz-option"><input type="radio" name="q2" value="c" class="mr-3"> in</label>
+                                </div>
+                                <p class="text-sm mt-1 ml-8" id="result-q2"></p>
                             </div>
-                            <p class="text-sm mt-1 ml-8" id="result-q2"></p>
                         </div>
                     </div>
-                </div>
 
-                <!-- Quiz 2: Vocabulary -->
-                 <div class="mb-8">
-                    <h4 class="text-xl font-semibold mb-4">Vocabulary Practice</h4>
-                    <div class="space-y-4" id="quiz2">
-                        <!-- Question 3 -->
-                        <div class="quiz-question" data-correct="c">
-                            <p class="font-semibold mb-2">3. To be "concise" means to be...</p>
-                            <div class="space-y-1">
-                                <label class="flex items-center p-2 rounded-lg cursor-pointer quiz-option"><input type="radio" name="q3" value="a" class="mr-3"> very detailed</label>
-                                <label class="flex items-center p-2 rounded-lg cursor-pointer quiz-option"><input type="radio" name="q3" value="b" class="mr-3"> very friendly</label>
-                                <label class="flex items-center p-2 rounded-lg cursor-pointer quiz-option"><input type="radio" name="q3" value="c" class="mr-3"> brief and to the point</label>
+                    <!-- Quiz 2: Vocabulary -->
+                    <div>
+                        <h4 class="text-xl font-semibold mb-4">Vocabulary Practice</h4>
+                        <div class="space-y-4" id="quiz2">
+                            <!-- Question 3 -->
+                            <div class="quiz-question" data-correct="c">
+                                <p class="font-semibold mb-2">3. To be "concise" means to be...</p>
+                                <div class="space-y-1">
+                                    <label class="flex items-center p-3 rounded-lg cursor-pointer quiz-option"><input type="radio" name="q3" value="a" class="mr-3"> very detailed</label>
+                                    <label class="flex items-center p-3 rounded-lg cursor-pointer quiz-option"><input type="radio" name="q3" value="b" class="mr-3"> very friendly</label>
+                                    <label class="flex items-center p-3 rounded-lg cursor-pointer quiz-option"><input type="radio" name="q3" value="c" class="mr-3"> brief and to the point</label>
+                                </div>
+                                <p class="text-sm mt-1 ml-8" id="result-q3"></p>
                             </div>
-                            <p class="text-sm mt-1 ml-8" id="result-q3"></p>
                         </div>
                     </div>
                 </div>
                 
-                <button id="check-answers-btn" class="bg-indigo-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-indigo-700 focusable transition duration-300">Check Answers</button>
+                <div class="mt-8 flex space-x-4">
+                    <button id="check-answers-btn" class="bg-indigo-600 text-white font-bold py-3 px-8 rounded-xl hover:bg-indigo-700 focusable transition duration-300 transform hover:scale-[1.02]">Check Answers</button>
+                    <button id="reset-quiz-btn" class="bg-gray-200 text-gray-700 font-bold py-3 px-8 rounded-xl hover:bg-gray-300 focusable transition duration-300">Reset Quiz</button>
+                </div>
             </div>
         </section>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white">
-        <div class="container mx-auto px-6 py-8 text-center">
-            <p class="text-2xl font-bold mb-2">ProEnglish <span class="telugu font-semibold">తెలుగు</span></p>
-            <p>&copy; 2024. Keep learning and growing professionally.</p>
+    <footer class="bg-gray-900 text-white">
+        <div class="container mx-auto px-6 py-10 text-center">
+            <p class="text-3xl font-bold mb-2">ProEnglish <span class="telugu font-semibold text-indigo-400">తెలుగు</span></p>
+            <p class="text-gray-400">&copy; 2024. Building professional communication skills.</p>
         </div>
     </footer>
 
     <script>
-        // JavaScript for mobile menu toggle
+        // --- DATA STRUCTURE FOR PHRASES ---
+        const phrasesData = [
+            {
+                title: "Greetings & Introductions",
+                teluguTitle: "శుభాకాంక్షలు & పరిచయాలు",
+                phrases: [
+                    { en: "Good morning. How are you doing today?", te: "శుభోదయం. ఈ రోజు మీరు ఎలా ఉన్నారు?" },
+                    { en: "It's a pleasure to meet you.", te: "మిమ్మల్ని కలవడం ఆనందంగా ఉంది." },
+                    { en: "My name is Anand, I'm the new Project Manager.", te: "నా పేరు ఆనంద్, నేను కొత్త ప్రాజెక్ట్ మేనేజర్‌ను." }
+                ]
+            },
+            {
+                title: "Small Talk",
+                teluguTitle: "చిన్న సంభాషణ",
+                phrases: [
+                    { en: "How was your weekend?", te: "మీ వారాంతం ఎలా గడిచింది?" },
+                    { en: "Are you working on anything exciting recently?", te: "మీరు ఇటీవల ఏదైనా ఆసక్తికరమైన దానిపై పని చేస్తున్నారా?" },
+                    { en: "I'm looking forward to the long weekend.", te: "నేను సుదీర్ఘ వారాంతం కోసం ఎదురు చూస్తున్నాను." }
+                ]
+            },
+            {
+                title: "Asking for Help",
+                teluguTitle: "సహాయం అడగడం",
+                phrases: [
+                    { en: "Could you please help me with this?", te: "దయచేసి దీనితో నాకు సహాయం చేయగలరా?" },
+                    { en: "Do you have a moment to review this document?", te: "ఈ పత్రాన్ని సమీక్షించడానికి మీకు కొంచెం సమయం ఉందా?" },
+                    { en: "I'm not sure how to proceed. Can you advise?", te: "ఎలా ముందుకు వెళ్లాలో నాకు ఖచ్చితంగా తెలియదు. మీరు సలహా ఇవ్వగలరా?" }
+                ]
+            },
+            {
+                title: "Giving Opinions",
+                teluguTitle: "అభిప్రాయాలు చెప్పడం",
+                phrases: [
+                    { en: "In my opinion, we should focus on quality.", te: "నా అభిప్రాయం ప్రకారం, మనం నాణ్యతపై దృష్టి పెట్టాలి." },
+                    { en: "I believe this is the best approach.", te: "ఇది ఉత్తమమైన విధానం అని నేను నమ్ముతున్నాను." },
+                    { en: "From my perspective, the deadline is too tight.", te: "నా దృష్టికోణంలో, గడువు చాలా తక్కువగా ఉంది." }
+                ]
+            },
+            {
+                title: "Agreeing",
+                teluguTitle: "అంగీకరించడం",
+                phrases: [
+                    { en: "I completely agree with you.", te: "నేను మీతో పూర్తిగా ఏకీభవిస్తున్నాను." },
+                    { en: "That's a great point.", te: "అది చాలా మంచి విషయం." },
+                    { en: "Exactly! I was thinking the same thing.", te: "ఖచ్చితంగా! నేను కూడా అదే ఆలోచిస్తున్నాను." }
+                ]
+            },
+            {
+                title: "Disagreeing Politely",
+                teluguTitle: "మర్యాదగా విభేదించడం",
+                phrases: [
+                    { en: "I see your point, but I have a different view.", te: "మీ ఉద్దేశం నాకు అర్థమైంది, కానీ నాకు వేరే అభిప్రాయం ఉంది." },
+                    { en: "I'm not sure I agree with that.", te: "నేను దానితో ఏకీభవిస్తానో లేదో నాకు ఖచ్చితంగా తెలియదు." },
+                    { en: "Perhaps we could consider another option?", te: "బహుశా మనం మరో ఎంపికను పరిగణించవచ్చా?" }
+                ]
+            }
+        ];
+
+        // --- DYNAMIC CONTENT GENERATION ---
+        function renderLessonCards() {
+            const container = document.getElementById('phrases-container');
+            if (!container) return; // Exit if container is not found
+
+            let html = '';
+            phrasesData.forEach(card => {
+                let phraseHtml = '';
+                card.phrases.forEach(p => {
+                    phraseHtml += `
+                        <div>
+                            <p class="font-semibold text-gray-700">"${p.en}"</p>
+                            <p class="telugu text-gray-600">${p.te}</p>
+                        </div>
+                    `;
+                });
+
+                html += `
+                    <div class="bg-white rounded-xl shadow-lg p-6 lesson-card border-t-4 border-indigo-400">
+                        <h3 class="text-xl font-bold text-indigo-700 mb-3">${card.title}</h3>
+                        <p class="telugu text-lg font-semibold text-indigo-600 mb-4">${card.teluguTitle}</p>
+                        <div class="space-y-4">
+                            ${phraseHtml}
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+        
+        // --- MOBILE MENU LOGIC ---
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
 
@@ -514,14 +378,20 @@
         const mobileLinks = mobileMenu.getElementsByTagName('a');
         for (let i = 0; i < mobileLinks.length; i++) {
             mobileLinks[i].addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
+                // Delay hiding the menu slightly to allow smooth scroll
+                setTimeout(() => {
+                    mobileMenu.classList.add('hidden');
+                }, 100);
             });
         }
 
-        // JavaScript for Practice Questions
+
+        // --- PRACTICE QUIZ LOGIC ---
         const checkAnswersBtn = document.getElementById('check-answers-btn');
-        checkAnswersBtn.addEventListener('click', () => {
-            const questions = document.querySelectorAll('.quiz-question');
+        const resetQuizBtn = document.getElementById('reset-quiz-btn');
+        const questions = document.querySelectorAll('.quiz-question');
+
+        const checkAnswers = () => {
             questions.forEach((question, index) => {
                 const questionNumber = index + 1;
                 const radios = question.querySelectorAll(`input[name="q${questionNumber}"]`);
@@ -533,27 +403,70 @@
                     if (radio.checked) {
                         selectedAnswer = radio.value;
                     }
+                    // Disable all radios after checking
+                    radio.disabled = true; 
+                    radio.parentElement.classList.add('checked');
                 });
 
                 resultEl.classList.remove('correct', 'incorrect');
 
                 if (selectedAnswer) {
                     if (selectedAnswer === correctAnswer) {
-                        resultEl.textContent = 'Correct!';
+                        resultEl.textContent = '✅ Correct!';
                         resultEl.classList.add('correct');
                     } else {
-                        resultEl.textContent = `Incorrect. The correct answer is '${correctAnswer.toUpperCase()}'.`;
+                        // Find the correct label to highlight it
+                        radios.forEach(radio => {
+                            if (radio.value === correctAnswer) {
+                                radio.parentElement.style.backgroundColor = '#dcfce7'; // green-100
+                            }
+                            if (radio.value === selectedAnswer) {
+                                radio.parentElement.style.backgroundColor = '#fee2e2'; // red-100
+                            }
+                        });
+
+                        resultEl.textContent = `❌ Incorrect. The correct answer is highlighted.`;
                         resultEl.classList.add('incorrect');
                     }
                 } else {
-                    resultEl.textContent = 'Please select an answer.';
+                    resultEl.textContent = '⚠️ Please select an answer.';
                     resultEl.classList.add('incorrect');
+                    // Enable radios again if no answer was selected so the user can try
+                    radios.forEach(radio => radio.disabled = false);
                 }
             });
-        });
+            checkAnswersBtn.disabled = true; // Disable check button after checking
+        };
+
+        const resetQuiz = () => {
+            questions.forEach((question, index) => {
+                const questionNumber = index + 1;
+                const radios = question.querySelectorAll(`input[name="q${questionNumber}"]`);
+                const resultEl = document.getElementById(`result-q${questionNumber}`);
+                
+                // Reset styling and content
+                resultEl.textContent = '';
+                resultEl.classList.remove('correct', 'incorrect');
+
+                // Reset radios
+                radios.forEach(radio => {
+                    radio.checked = false;
+                    radio.disabled = false;
+                    radio.parentElement.style.backgroundColor = '';
+                    radio.parentElement.classList.remove('checked');
+                });
+            });
+            checkAnswersBtn.disabled = false; // Re-enable check button
+        };
+
+        checkAnswersBtn.addEventListener('click', checkAnswers);
+        resetQuizBtn.addEventListener('click', resetQuiz);
+
+        // --- INITIALIZE APP ---
+        window.onload = function() {
+            renderLessonCards();
+        }
     </script>
 
 </body>
 </html>
-
-
